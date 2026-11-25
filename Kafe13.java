@@ -23,6 +23,13 @@ public class Kafe13 {
         System.out.println("Silahkan pilih menu yang Anda inginkan.");
     }
     
+    public static int hitungTotalHarga13(int pilihanMenu, int banyakItem) {
+        int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
+
+        int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+        return hargaTotal;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -37,6 +44,16 @@ public class Kafe13 {
         int jam = sc.nextInt();
 
         Menu(nama, member, jam);
+
+        System.out.print("\nMasukkan nomor menu yang ingin anda pesan: ");
+        int pilihanMenu = sc.nextInt();
+        System.out.print("Masukkan jumlah item yang ingin anda pesan: ");
+        int banyakItem = sc.nextInt();
+
+        int totalBayar = hitungTotalHarga13(pilihanMenu, banyakItem);
+
+        System.out.println("Total harga untuk pesanan Anda: Rp" + totalBayar);
+
         sc.close();
     }
 }

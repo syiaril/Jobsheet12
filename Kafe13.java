@@ -45,14 +45,30 @@ public class Kafe13 {
 
         Menu(nama, member, jam);
 
-        System.out.print("\nMasukkan nomor menu yang ingin anda pesan: ");
-        int pilihanMenu = sc.nextInt();
-        System.out.print("Masukkan jumlah item yang ingin anda pesan: ");
-        int banyakItem = sc.nextInt();
+        int totalHarga = 0;
+        while (true) {
+            System.out.print("\nMasukkan nomor menu (0 untuk selesai): ");
+            int pilihanMenu = sc.nextInt();
 
-        int totalBayar = hitungTotalHarga13(pilihanMenu, banyakItem);
+            if (pilihanMenu == 0) {
+                break;
+            }
 
-        System.out.println("Total harga untuk pesanan Anda: Rp" + totalBayar);
+            if (pilihanMenu < 1 || pilihanMenu > 6) {
+                System.out.println("Menu tidak tersedia");
+                continue;
+            }
+
+            System.out.print("Masukkan jumlah item: ");
+            int banyakItem = sc.nextInt();
+            if (banyakItem <= 0) {
+                System.out.println("Jumlah item tidak valid");
+                continue;
+            }
+    
+            totalHarga += hitungTotalHarga13(pilihanMenu, banyakItem);
+        }
+        System.out.println("Total harga untuk pesanan Anda: Rp" + totalHarga);
 
         sc.close();
     }

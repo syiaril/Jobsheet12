@@ -25,51 +25,81 @@ public class Kafe13 {
     
     public static int hitungTotalHarga13(int pilihanMenu, int banyakItem) {
         int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
-
+        
         int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
         return hargaTotal;
     }
+    
+    public static int hitungDiskon(int total, String kodePromo, boolean isMember) {
+        int persen = 0;
+        
+        if (kodePromo.equals("DISKON50")) {
+            persen = 50;
+        } else if (kodePromo.equals("DISKON30")) {
+            persen = 30;
+        } else {
+            System.out.println("Kode promo invalid");
+        }
 
+        if (isMember) {
+            persen += 10;
+        }
+
+        return total * persen / 100;
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        
         System.out.print("Masukkan nama pelanggan: ");
         String nama = sc.nextLine();
-
+        
         System.out.print("Apakah member? (y/n): ");
         String jawab = sc.nextLine();
         boolean member = jawab.equalsIgnoreCase("y");
 
         System.out.print("Masukkan jam kunjung (0-23): ");
         int jam = sc.nextInt();
-
+        
         Menu(nama, member, jam);
-
+        
         int totalHarga = 0;
         while (true) {
             System.out.print("\nMasukkan nomor menu (0 untuk selesai): ");
             int pilihanMenu = sc.nextInt();
-
+            
             if (pilihanMenu == 0) {
                 break;
             }
-
+            
             if (pilihanMenu < 1 || pilihanMenu > 6) {
                 System.out.println("Menu tidak tersedia");
                 continue;
             }
-
+            
             System.out.print("Masukkan jumlah item: ");
             int banyakItem = sc.nextInt();
             if (banyakItem <= 0) {
                 System.out.println("Jumlah item tidak valid");
                 continue;
             }
-    
+            
             totalHarga += hitungTotalHarga13(pilihanMenu, banyakItem);
         }
-        System.out.println("Total harga untuk pesanan Anda: Rp" + totalHarga);
-
+        
+        sc.nextLine();
+        System.out.print("Masukkan kode promo: ");
+        String kodePromo = sc.nextLine();
+        
+        int diskon = hitungDiskon(totalHarga, kodePromo, member);
+        int totaBayar = totalHarga - diskon;
+        
+        
+        System.out.println("\n===== RINCIAN PEMBAYARAN =====");
+        System.out.println("Total harga      : Rp" + totalHarga);
+        System.out.println("Total diskon     : Rp" + diskon);
+        System.out.println("Total pembayaran : Rp" + totaBayar);
+        
         sc.close();
     }
 }

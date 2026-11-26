@@ -9,25 +9,31 @@ public class HitungBalok13 {
         int volume = hitungLuas(a, b) * tinggi;
         return volume;
     }
+    static int hitungLuasPermukaanBalok(int p, int l, int t) {
+        return 2 * (hitungLuas(p, l) + hitungLuas(p, t) + hitungLuas(l, t));
+    }
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int p, l, t, L, vol;
 
-        System.out.println("Masukkan panjang");
-        p = input.nextInt();
-
-        System.out.println("Masukkan lebar");
-        l = input.nextInt();
-
-        System.out.println("Masukkan tinggi");
-        t = input.nextInt();
-
-        L = hitungLuas(p, l);
-        System.out.println("Luas persegi panjang adalah " + L);
-
-        vol = hitungVolume(t, p, l);
-        System.out.println("Volume balok adalah " + vol);
-
+        for (int i = 0; i < 3; i++) {
+            // int p, l, t, L, vol;
+    
+            System.out.print("Masukkan panjang: ");
+            int p = input.nextInt();
+    
+            System.out.print("Masukkan lebar: ");
+            int l = input.nextInt();
+    
+            System.out.print("Masukkan tinggi: ");
+            int t = input.nextInt();
+    
+            // L = hitungLuas(p, l);
+            // System.out.println("Luas persegi panjang adalah " + hitungLuas(p, l));
+    
+            System.out.println("Luas permukaan balok adalah " + hitungLuasPermukaanBalok(p, l, t));
+            // vol = hitungVolume(t, p, l);
+            System.out.println("Volume balok adalah " + hitungVolume(t, p, l));
+        }
         input.close();
     }
 }
